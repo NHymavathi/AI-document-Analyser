@@ -1,0 +1,6 @@
+invoice_number,customer_name,issue_date,due_date,amount,status,days_overdue
+INV-2026-001,Apex Retail Distributors,2026-01-10,2026-02-10,45000.00,OVERDUE,62
+INV-2026-002,Vanguard Logistics Ltd,2026-01-15,2026-02-15,28500.00,OVERDUE,57
+INV-2026-003,Metro Hardware Chains,2026-02-01,2026-03-01,15000.00,PENDING,0
+INV-2026-004,Zenith Industrial Parts,2026-02-05,2026-03-05,32000.00,OVERDUE,38
+INV-2026-005,Global Cargo Solutions,2026-02-10,2026-03-10,18200.00,PAID,0

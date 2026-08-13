@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Financial Document Intelligence Agent | SME Platform</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+</head>
+<body>
+
+    <!-- SECTION 1: Professional Header -->
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="brand-wrapper">
+                <div class="brand-logo">⚡</div>
+                <div class="brand-title-box">
+                    <h1>Financial Document Intelligence Agent</h1>
+                    <div class="brand-sub">Apex Manufacturing & Distribution SME &bull; Account #SME-9042</div>
+                </div>
+            </div>
+            
+            <div class="header-status-group">
+                <div class="status-pill">
+                    <div class="pulse-dot"></div>
+                    <span id="agent-status-label">LangGraph Agent: Ready</span>
+                </div>
+                <div class="user-profile">
+                    <span>🕒 <strong id="live-clock">--:--:--</strong></span>
+                    <span style="margin-left: 10px;">👤 <strong>Senior Finance Lead</strong></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="main-container">
+        
+        <!-- File Upload Hero Card -->
+        <section id="upload-card" class="upload-hero">
+            <div style="font-size: 38px; margin-bottom: 10px;">📂</div>
+            <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 6px;">Autonomous Financial Document Upload</h2>
+            <p style="color: var(--text-sub); font-size: 14px; max-width: 650px; margin: 0 auto;">
+                Drop Balance Sheets (PDF), Invoices (CSV/Excel), Transactions Ledger, or Scanned Receipts. The agent starts reasoning immediately without manual prompting.
+            </p>
+            <input type="file" id="file-input" multiple hidden>
+            <div class="btn-row">
+                <button class="btn-saas btn-primary-glow" onclick="document.getElementById('file-input').click()">📁 Browse Document Suite</button>
+                <button id="demo-btn" class="btn-saas btn-preset">🚀 Instant 1-Click Hackathon Demo Scenario</button>
+            </div>
+        </section>
+
+        <!-- Progress Console (Visible during agent processing) -->
+        <section id="progress-container" style="display: none; margin-bottom: 35px;" class="exec-summary-card">
+            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                <span id="current-step-label" style="font-weight:700; color:var(--accent-cyan);">Initializing Agent Swarm...</span>
+                <span style="font-size:12px; color:var(--text-sub);">LangGraph Workflow Execution</span>
+            </div>
+            <div style="height:6px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden; margin-bottom:15px;">
+                <div id="progress-bar" style="height:100%; width:0%; background:linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); transition:width 0.4s ease;"></div>
+            </div>
+            <div id="console-logs" style="background:#050811; border-radius:8px; padding:12px; font-family:'Fira Code', monospace; font-size:12px; color:#A7F3D0; max-height:100px; overflow-y:auto;"></div>
+        </section>
+
+        <!-- Dynamic Results Container (Hidden until analysis ready) -->
+        <div id="results-container" style="display: none;">
+            
+            <!-- SECTION 11: LangGraph Workflow Node Graph Visualizer -->
+            <section class="workflow-graph-container">
+                <div class="section-header-title">
+                    <span>⚡ SECTION 11:</span> LangGraph Multi-Agent Execution State Graph
+                </div>
+                <div class="node-graph-flex" id="node-graph-container">
+                    <!-- Dynamic Node Items -->
+                </div>
+            </section>
+
+            <!-- SECTION 2: AI Executive Summary Card -->
+            <section class="exec-summary-card">
+                <div class="exec-header">
+                    <div>
+                        <span style="font-size:12px; font-weight:700; color:var(--accent-blue); text-transform:uppercase;">SECTION 2 &bull; Autonomous Reasoning</span>
+                        <h2 style="font-size:22px; font-weight:800; margin-top:2px;">AI Executive Summary</h2>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:18px;">
+                        <div class="score-badge-circle" id="exec-score-badge">
+                            <span id="exec-score-val">78</span>
+                            <span style="font-size:9px; color:var(--text-sub);">/ 100</span>
+                        </div>
+                        <div>
+                            <div style="font-size:12px; color:var(--text-sub);">Overall Health: <strong id="exec-health-status" style="color:var(--accent-emerald);">Healthy</strong></div>
+                            <div style="font-size:12px; color:var(--text-sub); margin-top:3px;">Confidence: <strong id="exec-conf-score" style="color:var(--accent-cyan);">96.4%</strong></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="observation-grid">
+                    <div>
+                        <div style="font-size:13px; font-weight:700; color:var(--text-main); margin-bottom:10px;">📌 Key Operational Observations</div>
+                        <div id="exec-obs-list">
+                            <!-- Dynamic Observation Bullet Items -->
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rec-box">
+                            <div style="font-size:13px; font-weight:700; color:var(--accent-emerald); margin-bottom:6px;">💡 Top Strategic Recommendation</div>
+                            <p id="exec-top-rec" style="font-size:13px; color:var(--text-main); line-height:1.5;">
+                                Enforce credit holds on delinquent accounts.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: 7 Financial KPI Cards -->
+            <section style="margin-bottom: 35px;">
+                <div class="section-header-title">
+                    <span>📊 SECTION 3:</span> Financial KPI Cards (Real-time Metrics)
+                </div>
+                <div class="kpi-grid">
+                    <!-- KPI 1: Revenue -->
+                    <div class="kpi-card">
+                        <div class="kpi-top"><span class="kpi-icon">💰</span><span class="kpi-label">Revenue</span></div>
+                        <div class="kpi-value" id="kpi-revenue">$0.00</div>
+                        <div class="kpi-bottom"><span class="growth-badge growth-up">+12.4% ↑</span></div>
+                    </div>
+                    <!-- KPI 2: Expenses -->
+                    <div class="kpi-card">
+                        <div class="kpi-top"><span class="kpi-icon">💸</span><span class="kpi-label">Expenses</span></div>
+                        <div class="kpi-value" id="kpi-expenses">$0.00</div>
+                        <div class="kpi-bottom"><span class="growth-badge growth-down">+8.1% ↑</span></div>
+                    </div>
+                    <!-- KPI 3: Net Profit -->
+                    <div class="kpi-card">
+                        <div class="kpi-top"><span class="kpi-icon">📈</span><span class="kpi-label">Net Profit</span></div>
+                        <div class="kpi-value" id="kpi-profit">$0.00</div>
+                        <div class="kpi-bottom"><span class="growth-badge growth-up">+15.2% ↑</span></div>
+                    </div>
+                    <!-- KPI 4: Profit Margin -->
+                    <div class="kpi-card">
+                        <div class="kpi-top"><span class="kpi-icon">📊</span><span class="kpi-label">Margin %</span></div>
+                        <div class="kpi-value" id="kpi-margin">0.0%</div>
+                        <div class="kpi-bottom"><span class="growth-badge growth-up">+2.3% ↑</span></div>
+                    </div>
+                    <!-- KPI 5: Cash Flow -->
+                    <div class="kpi-card">
+                        <div class="kpi-top"><span class="kpi-icon">⚡</span><span class="kpi-label">Cash Flow</span></div>
+                        <div class="kpi-value" id="kpi-cashflow">$0.00</div>
+                        <div class="kpi-bottom"><span class="growth-badge growth-up">+6.5% ↑</span></div>
+                    </div>
+                    <!-- KPI 6: Liquidity Ratio -->
+                    <div class="kpi-card">
+                        <div class="kpi-top"><span class="kpi-icon">💧</span><span class="kpi-label">Liquidity</span></div>
+                        <div class="kpi-value" id="kpi-liquidity">1.50x</div>
+                        <div class="kpi-bottom"><span class="growth-badge growth-up">+0.15 ↑</span></div>
+                    </div>
+                    <!-- KPI 7: Working Capital -->
+                    <div class="kpi-card">
+                        <div class="kpi-top"><span class="kpi-icon">🏦</span><span class="kpi-label">Working Cap</span></div>
+                        <div class="kpi-value" id="kpi-workingcap">$0.00</div>
+                        <div class="kpi-bottom"><span class="growth-badge growth-up">+4.8% ↑</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: Interactive Plotly Charts -->
+            <section style="margin-bottom: 35px;">
+                <div class="section-header-title">
+                    <span>📈 SECTION 4:</span> Interactive Financial Visualizations & Trends
+                </div>
+                <div class="charts-grid-saas">
+                    <div class="chart-card-saas" id="revenue-expense-trend-chart"></div>
+                    <div class="chart-card-saas" id="profit-cashflow-chart"></div>
+                    <div class="chart-card-saas" id="expense-breakdown-chart"></div>
+                    <div class="chart-card-saas" id="monthly-comparison-chart"></div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: Current State Analysis -->
+            <section style="margin-bottom: 35px;">
+                <div class="section-header-title">
+                    <span>📋 SECTION 5:</span> Current State Analysis & Citation Traceability
+                </div>
+                <div class="analysis-cards-grid" id="analysis-cards-container">
+                    <!-- Dynamic Analysis Cards -->
+                </div>
+            </section>
+
+            <!-- SECTION 6: Gap Detection Matrix -->
+            <section style="margin-bottom: 35px;">
+                <div class="section-header-title">
+                    <span>🧩 SECTION 6:</span> Document Gap Detection & Blocked Decisions Matrix
+                </div>
+                <p style="font-size:13px; color:var(--text-sub); margin-bottom:15px;">*Strict Zero-Guessing Guarantee: Missing document values are never hallucinated or invented.</p>
+                <div class="gap-matrix-grid" id="gap-matrix-container">
+                    <!-- Dynamic 5-Category Checklist Cards -->
+                </div>
+            </section>
+
+            <!-- SECTION 7 & 8: Forward Looking Flags & AI Recommendations -->
+            <section style="margin-bottom: 35px;">
+                <div class="split-grid-2">
+                    <!-- SECTION 7: Forward Looking Flags -->
+                    <div>
+                        <div class="section-header-title">
+                            <span>🚩 SECTION 7:</span> Forward-Looking Risk Flags
+                        </div>
+                        <div id="risk-flags-container">
+                            <!-- Dynamic Risk Flag Items -->
+                        </div>
+                    </div>
+                    <!-- SECTION 8: Prioritized AI Recommendations -->
+                    <div>
+                        <div class="section-header-title">
+                            <span>💡 SECTION 8:</span> Prioritized AI Action Recommendations
+                        </div>
+                        <div id="recommendations-container">
+                            <!-- Dynamic Recommendation Items -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 9 & 10: Document Evidence & AI Reasoning Chain -->
+            <section style="margin-bottom: 35px;">
+                <div class="split-grid-2">
+                    <!-- SECTION 9: Document Evidence Table -->
+                    <div class="chart-card-saas" style="min-height:auto;">
+                        <div class="section-header-title">
+                            <span>📄 SECTION 9:</span> Extracted Document Evidence
+                        </div>
+                        <table class="evidence-table">
+                            <thead>
+                                <tr>
+                                    <th>File Name</th>
+                                    <th>Category</th>
+                                    <th>Location</th>
+                                    <th>Confidence</th>
+                                </tr>
+                            </thead>
+                            <tbody id="evidence-table-body">
+                                <!-- Dynamic Evidence Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- SECTION 10: AI Reasoning Chain -->
+                    <div class="chart-card-saas" style="min-height:auto;">
+                        <div class="section-header-title">
+                            <span>🔍 SECTION 10:</span> Transparent AI Reasoning Chain
+                        </div>
+                        <div id="reasoning-chain-container">
+                            <!-- Dynamic Reasoning Steps -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 12: System Analytics -->
+            <section style="margin-bottom: 35px;">
+                <div class="section-header-title">
+                    <span>⚡ SECTION 12:</span> Platform Processing Analytics & Performance
+                </div>
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <div style="font-size:12px; color:var(--text-sub);">Processing Time</div>
+                        <div class="analytics-val" id="analytics-time">1,420 ms</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div style="font-size:12px; color:var(--text-sub);">EasyOCR Accuracy</div>
+                        <div class="analytics-val" id="analytics-ocr">98.5%</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div style="font-size:12px; color:var(--text-sub);">Docs Uploaded</div>
+                        <div class="analytics-val" id="analytics-docs">3 Files</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div style="font-size:12px; color:var(--text-sub);">Pages Processed</div>
+                        <div class="analytics-val" id="analytics-pages">4 Pages</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div style="font-size:12px; color:var(--text-sub);">AI Confidence</div>
+                        <div class="analytics-val" id="analytics-conf">96.8%</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- SECTION 13: Footer Tech Stack -->
+        <footer class="app-footer">
+            <div style="font-size:13px; color:var(--text-sub);">
+                <strong>Financial Document Intelligence Agent for SMEs</strong> &bull; Enterprise Hackathon Edition
+            </div>
+            <div class="tech-badge-container">
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3 Glassmorphism</span>
+                <span class="tech-badge">JavaScript ES6+</span>
+                <span class="tech-badge">Python Flask</span>
+                <span class="tech-badge">SQLite Database</span>
+                <span class="tech-badge">Google Gemini API</span>
+                <span class="tech-badge">LangChain</span>
+                <span class="tech-badge">LangGraph</span>
+                <span class="tech-badge">LangSmith</span>
+                <span class="tech-badge">Vector RAG Engine</span>
+                <span class="tech-badge">EasyOCR</span>
+                <span class="tech-badge">PyMuPDF</span>
+                <span class="tech-badge">Plotly.js</span>
+            </div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:15px;">
+                STRICT LEGAL DISCLAIMER: Operational financial intelligence report. Does NOT constitute tax or investment advice.
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="/static/js/charts.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

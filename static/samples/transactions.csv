@@ -1,0 +1,9 @@
+date,description,category,amount,type
+2026-01-05,Customer Payment - Global Cargo,Revenue,18200.00,CREDIT
+2026-01-08,Raw Material Supplier Payment,Vendor Supplies,38500.00,DEBIT
+2026-01-15,Monthly Staff Payroll,Payroll,42000.00,DEBIT
+2026-01-20,Warehouse Lease & Utilities,Rent & Utilities,14500.00,DEBIT
+2026-01-28,Freight & Fleet Logistics,Logistics,12800.00,DEBIT
+2026-02-02,Emergency Equipment Maintenance,Operations,8500.00,DEBIT
+2026-02-12,Customer Wire Inflow,Revenue,25000.00,CREDIT
+2026-02-18,Quarterly Fleet Insurance,Insurance,6200.00,DEBIT
