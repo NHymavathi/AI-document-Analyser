@@ -13,7 +13,7 @@ class Config:
     # Storage Paths
     UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
     SAMPLE_FOLDER = os.path.join(BASE_DIR, 'static', 'samples')
-    DATABASE_PATH = os.path.join(BASE_DIR, 'financial_agent.db')
+    DATABASE_PATH = '/tmp/financial_agent.db'
     
     # LangSmith Observability
     LANGCHAIN_TRACING_V2 = os.environ.get('LANGCHAIN_TRACING_V2', 'true')
